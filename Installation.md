@@ -38,3 +38,8 @@ After installation, your directory structure should look like:
 ~/cobot_ws/
 └── cobot_ros2/
 ```
+## To set up ROS2 work space
+* Refer to the Setup.md file inside the cobot_ros2 directory to build and configure the ROS2 workspace.
+
+## To control the robot
+* Instructions for operating the robot are provided in the README_.md file located inside the cobot_ros2 directory.
