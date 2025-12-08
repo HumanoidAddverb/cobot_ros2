@@ -1,0 +1,10 @@
+# goal 
+string label
+int32 iterations
+---
+# result
+string error_code
+---
+# feedback
+int32 iteration
+float64[] joint_state 
