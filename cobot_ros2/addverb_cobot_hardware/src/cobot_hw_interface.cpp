@@ -283,6 +283,11 @@ namespace addverb_cobot
                 info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &hw_state_jtor_[i]));
         }
 
+        // Register gripper interface
+        
+        state_interfaces.emplace_back(hardware_interface::StateInterface(
+            "finger_joint", hardware_interface::HW_IF_POSITION, &gripper_pos_));
+
         // register ptp interface
         state_interfaces.emplace_back(hardware_interface::StateInterface(
             info_.gpios.at(1).name, info_.gpios.at(1).state_interfaces[0].name, &ptp_state_.transfer_state));
@@ -2080,6 +2085,12 @@ namespace addverb_cobot
         robot_state_ = cont.convert_data->robot_state.value();
 
         robot_status_ = 1.0 * (static_cast<int>(robot_state_));
+        if(gripper_cmd_.position==1){
+            gripper_pos_= 0.0;
+        }
+        else{
+            gripper_pos_= 0.725 ;
+        }
 
         return true;
     }

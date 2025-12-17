@@ -128,10 +128,30 @@ def generate_launch_description():
         arguments=["gripper_controller", "--param-file", robot_controllers],
     )
 
-    nodes = [control_node, robot_state_pub_node, joint_state_broadcaster_spawner, velocity_controller_spawner, ptp_tcp_controller_spawner,ptp_joint_controller_spawner, recorder_controller_spawner,
-             joint_jogging_controller_spawner,cartesian_jogging_controller_spawner,joint_impedance_controller_spawner,
-             cartesian_impedance_controller_spawner, effort_controller_spawner, free_drive_controller_spawner, gripper_controller_spawner, gravity_comp_effort_controller_spawner]
+    gripper_bridge = Node(
+        package="addverb_cobot_controllers",
+        executable="gripper_action_bridge",
+        output="screen"
+    )
 
+    nodes = [
+    control_node,
+    robot_state_pub_node,
+    joint_state_broadcaster_spawner,
+    velocity_controller_spawner,
+    ptp_tcp_controller_spawner,
+    ptp_joint_controller_spawner,
+    recorder_controller_spawner,
+    joint_jogging_controller_spawner,
+    cartesian_jogging_controller_spawner,
+    joint_impedance_controller_spawner,
+    cartesian_impedance_controller_spawner,
+    effort_controller_spawner,
+    free_drive_controller_spawner,
+    gripper_controller_spawner,
+    gravity_comp_effort_controller_spawner,
+    gripper_bridge,
+]
     return LaunchDescription(nodes)
 
 

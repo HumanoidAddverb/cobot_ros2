@@ -165,6 +165,24 @@ install(TARGETS addverb_cobot_controllers  controller_utils
   RUNTIME DESTINATION bin
 )
 
+add_executable(gripper_action_bridge src/gripper_action_bridge.cpp)
+
+ament_target_dependencies(
+  gripper_action_bridge
+  ${THIS_PACKAGE_INCLUDE_DEPENDS}
+  addverb_cobot_msgs
+)
+
+target_include_directories(gripper_action_bridge PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
+install(TARGETS gripper_action_bridge
+  RUNTIME DESTINATION lib/${PROJECT_NAME}
+)
+
+
 ## EXPORTS
 ament_export_targets(export_addverb_cobot_controllers HAS_LIBRARY_TARGET)
 ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})

@@ -106,8 +106,8 @@ class MoveItPlanExecuteClient(Node):
 def main(args=None):
 
     joint_limits={0:(-math.pi/4,math.pi/4),
-                1:(0,math.pi/6),
-                2:(-math.pi/6,math.pi/6),
+                1:(0,math.pi/10),
+                2:(-math.pi/6,math.pi/10),
                 3:(-math.pi/3,math.pi/6),
                 4:(-math.pi/3,math.pi/3),
                 5:(-math.pi/4,math.pi/4)}
@@ -128,13 +128,11 @@ def main(args=None):
             'joint6': np.clip(random_jpos[5],joint_limits[5][0],joint_limits[5][1]),
         }
 
-        # input('Press Enter to send a planning request...') 
         trajectory = node.plan_to_joint_positions(target_positions, group_name='syncro_5')
 
         if trajectory:
             node.get_logger().info(f'Received trajectory with {len(trajectory.joint_trajectory.points)} points')
 
-            # input('Press Enter to execute the planned trajectory...')
             success = node.execute_trajectory(trajectory)
 
             if success:
